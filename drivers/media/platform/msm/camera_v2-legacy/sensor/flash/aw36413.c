@@ -387,6 +387,16 @@ static int msm_flash_aw36413_i2c_probe(struct i2c_client *client,
     return -EINVAL;
   }
 
+  if (!i2c_check_functionality(aw36413->a1, I2C_FUNC_I2C)) {
+    aw_err("i2c adapter 1 is not functional\n");
+    return -EINVAL;
+  }
+
+  if (!i2c_check_functionality(aw36413->a2, I2C_FUNC_I2C)) {
+    aw_err("i2c adapter 2 is not functional\n");
+    return -EINVAL;
+  }
+
   if (!fctrl.flashdata) {
     aw_err("Qualcomm driver was not initialized yet\n");
     return -EINVAL; 
@@ -410,6 +420,7 @@ static int msm_flash_aw36413_i2c_probe(struct i2c_client *client,
   }
 
   aw36413_get_vendor_id();
+
   ret = msm_i2c_torch_create_classdev(&client->dev, NULL);
   if (ret) {
     pr_err("%s: failed to create classdev %d\n", __func__, __LINE__);

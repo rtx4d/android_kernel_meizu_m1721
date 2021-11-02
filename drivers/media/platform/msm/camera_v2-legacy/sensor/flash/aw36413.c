@@ -397,10 +397,10 @@ static int msm_flash_aw36413_i2c_probe(struct i2c_client *client,
     return -EINVAL;
   }
 
-  if (!fctrl.flashdata) {
-    aw_err("Qualcomm driver was not initialized yet\n");
-    return -EINVAL; 
-  }
+  // if (!fctrl.flashdata) {
+  //   aw_err("Qualcomm driver was not initialized yet\n");
+  //   return -EINVAL; 
+  // }
 
   msm_flash_i2c_probe(client, id);
 

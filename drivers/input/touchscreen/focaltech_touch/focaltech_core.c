@@ -1066,7 +1066,7 @@ static int fts_check_chip_version(struct i2c_client *client) {
 
 	for (i = 0; i < 5; i++) {
 		ret = fts_i2c_read_reg(client, 0xA3, &val);
-		if (!ret)
+		if (ret > 0)
 			return 0;
 
 		msleep(5);
